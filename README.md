@@ -59,3 +59,9 @@ Options:
   --camera.fov arg (=90)
 
 $ ./hostExample   // This will render cornellbox scene by CudaTracerLib
+
+
+or just type:
+
+$ ./CornellBox.sh
+$ ./Greenbig.sh
