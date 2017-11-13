@@ -12,6 +12,7 @@ Features:
 
 	(3) Any parameter offered by command line option is prior to the couterpart given by cudatracerlib.ini.
 
+At present, examples for CornellBox and Green_big models are available, more models will come soon.
 
 How to use:
 
