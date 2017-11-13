@@ -6,7 +6,12 @@ example how to use CudaTracerLib, CudaTracerLib see  https://github.com/hhergeth
 
 Features:
 
-    A complete example how to use CudaTracerLib library, and with a carlibration in shell.
+    (1) A complete example how to use CudaTracerLib library, and with a carlibration in shell.
+	
+	(2) hostExample will read config from cudatracerlib.ini, if no special command line parameters given.
+
+	(3) Any parameter offered by command line option is prior to the couterpart given by cudatracerlib.ini.
+
 
 How to use:
 
