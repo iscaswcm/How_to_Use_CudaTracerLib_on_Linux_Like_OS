@@ -8,8 +8,11 @@ Features:
 How to use:
 
 $ make
+
 $ ./hostExample --help
+
 Options:
+
   --help
 
   --model.path arg (=Data/)
@@ -64,4 +67,5 @@ $ ./hostExample   // This will render cornellbox scene by CudaTracerLib
 or just type:
 
 $ ./CornellBox.sh
+
 $ ./Greenbig.sh
