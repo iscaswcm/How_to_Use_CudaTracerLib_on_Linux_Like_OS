@@ -74,6 +74,6 @@ $ ./hostExample   // This will render cornellbox scene by CudaTracerLib
 
 or just type:
 
-$ ./CornellBox.sh
+$ ./CornellBox.sh   //for CornellBox model
 
-$ ./Greenbig.sh
+$ ./Greenbig.sh    // for Green_big model
