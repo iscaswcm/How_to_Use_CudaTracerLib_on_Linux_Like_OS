@@ -1,5 +1,8 @@
 # example_use_CudaTracerLib
-example how to use CudaTracerLib, CudaTracerLib see  https://github.com/hhergeth/CudaTracerLib
+example how to use CudaTracerLib, CudaTracerLib see  https://github.com/hhergeth/CudaTracerLib,
+
+Features:
+    A compliete example how to use CudaTracerLib library, and with a carlibration in shell.
 
 How to use:
 
