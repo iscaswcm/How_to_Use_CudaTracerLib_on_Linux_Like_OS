@@ -10,7 +10,7 @@ Features:
 	
 	(2) hostExample will read config from cudatracerlib.ini, if no special command line parameters given.
 
-	(3) Any parameter offered by command line option is prior to the couterpart given by cudatracerlib.ini.
+	(3) Any parameter offered by command line option is prior to the counterpart given by cudatracerlib.ini.
 
 At present, examples for CornellBox and Green_big models are available, more models will come soon.
 
