@@ -12,8 +12,8 @@ void signalHandler(int signal)
 
 int App::run(int argc, char** argv)
 {
-	signal(SIGINT, signalHandler); //Interrupt from keyboard, such as  CTRL+C CTRL+D, deal such events with signalHandler. 
-	signal(SIGTERM, signalHandler);//Termination signal( default is kill),  deal such events with signalHandler.
+	//signal(SIGINT, signalHandler); //Interrupt from keyboard, such as  CTRL+C CTRL+D, deal such events with signalHandler. 
+	//signal(SIGTERM, signalHandler);//Termination signal( default is kill),  deal such events with signalHandler.
 
 	Log& log = getLog();//record log in cudatracerlib.log
 	try
