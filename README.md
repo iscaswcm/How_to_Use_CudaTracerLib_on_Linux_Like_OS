@@ -1,8 +1,8 @@
 # example_use_CudaTracerLib
 
-First of all, special thanks to CudaTracerLib's author Hannes.
+First of all, special thanks to CudaTracerLib's author Hannes Hergeth.
 
-example how to use CudaTracerLib, CudaTracerLib see  https://github.com/hhergeth/CudaTracerLib,
+Example how to use CudaTracerLib, which lies in https://github.com/hhergeth/CudaTracerLib.
 
 Features:
 
