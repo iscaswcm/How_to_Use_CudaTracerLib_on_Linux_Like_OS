@@ -61,7 +61,7 @@ int ConsoleRunner::run()
 
 	samplesPerSecondAverage.setAlpha(0.05f);
 
-    printf("\033[32;49;2m");
+    printf("\033[32;49;6m");
 	Timer totalElapsedTimer;
 	const std::string modelPath = settings.model.path;
 	const std::string modelName = settings.model.name;
@@ -94,17 +94,12 @@ int ConsoleRunner::run()
 
 	//A SceneInitData object specifies the maximum number of 
 	//meshes/triangles to allocate sufficient storage on the GPU
-	DynamicScene scene(&camera, SceneInitData::CreateForScene(10, 10, 1000), &fManager);
+	// static SceneInitData CreateForScene(unsigned int a_Meshes, unsigned int a_NumObjects, unsigned int a_NumAvgTriPerObj,
+	// unsigned int a_NumAvgMatPerObj = 5, unsigned int a_NumLights = 1 << 10, unsigned int a_AnimSize = 0, bool envMap = true)
+	DynamicScene scene(&camera, SceneInitData::CreateForScene(100, 1000, 1000), &fManager);
 	//SetupScene(modelPath, modelName, camera, position, target, up, scene);
 	scene.CreateNode(modelPath + modelName);
 	camera.SetToWorld(position, target, up);
-
-    //for debug
-	log.logInfo("modelPath = %s, modelName    = %s", modelPath.c_str(), modelName.c_str());
-	log.logInfo("width     = %u, height       = %u, fov          = %f", width, height, fov);
-	log.logInfo("filename  = %s, imageSamples = %u, pixelSamples = %u", 
-			settings.image.fileName.c_str(), settings.renderer.imageSamples, pixelSamples);
-	log.logInfo("Scene %d bounding box %s", modelName, scene.getSceneBox());
 
 	Image outImage(width, height);
 
@@ -122,11 +117,17 @@ int ConsoleRunner::run()
 	//construct/update the scene BVH and copy data to the device
 	scene.UpdateScene();
 
+    //for debug
+	log.logInfo("modelPath = %s, modelName    = %s", modelPath.c_str(), modelName.c_str());
+	log.logInfo("width     = %u, height       = %u, fov          = %f", width, height, fov);
+	log.logInfo("filename  = %s, imageSamples = %u, pixelSamples = %u", 
+			settings.image.fileName.c_str(), settings.renderer.imageSamples, pixelSamples);
+	log.logInfo("Scene %d bounding box %s", modelName, scene.getSceneBox());
+
 	//the following code just implement a calibration,
 	//so user is able to know the exact rendering process
 	/****************************************************************/
 	interrupted = false;
-	SysUtils::setConsoleTextColor(ConsoleTextColor::WHITE_ON_BLACK);
 	uint64_t totalSamples = uint64_t(width) * uint64_t(height) * uint64_t(imageSamples);
 	std::atomic<uint32_t> totalSampleCount;
 	totalSampleCount = 0;
@@ -212,8 +213,8 @@ int ConsoleRunner::run()
 	auto elapsed = renderingElapsedTimer.getElapsed();
 	auto remaining = renderingElapsedTimer.getRemaining();
 
+	//for last pass update
 	printProgress(renderingElapsedTimer.getPercentage(), elapsed, remaining, pixelSamples, currentpass);
-
 	float totalSamplesPerSecond = 0.0f;
 
 	if(elapsed.totalMilliseconds > 0)
@@ -225,8 +226,6 @@ int ConsoleRunner::run()
 		interrupted ? "interrupted" : "finished",
 		elapsed.getString(true),
 		StringUtils::humanizeNumber(totalSamplesPerSecond));
-
-	SysUtils::setConsoleTextColor(ConsoleTextColor::DEFAULT);
 
 	log.logInfo("Writing final image %s ......Done", outputFileName);
 	log.logInfo("Total elapsed time: %s", totalElapsedTimer.getElapsed().getString(true));

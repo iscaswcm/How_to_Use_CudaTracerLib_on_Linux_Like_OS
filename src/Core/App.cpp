@@ -23,7 +23,7 @@ int App::run(int argc, char** argv)
 
 		if(!settings.load(argc, argv))//load settings from cmd line and confiurable file-- cudatracerlib.ini.
 			return 0;
-		printf("\033[32;49;2m");
+		printf("\033[32;49;6m");
 		log.logInfo(std::string("CudaTracerLib v") + CUDATRACERLIB_VERSION);
 
 		if(settings.general.maxCpuThreadCount == 0)

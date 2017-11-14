@@ -1,6 +1,6 @@
 ECHO       := echo -e
 DEF        := -m64  -DUSE_CUDA
-LIB        := -L../build -lCudaTracerLib -lboost_system -lboost_filesystem -lboost_program_options -lboost_iostreams -lfreeimage
+LIB        := -L../build.ori -lCudaTracerLib -lboost_system -lboost_filesystem -lboost_program_options -lboost_iostreams -lfreeimage
 INCLUDE    := -I. -Isrc -Isrc/include -I../CudaTracerLib -I../qMatrixLib  
 NVCC_FLAGS := -std=c++11 -arch=compute_35 -code=sm_35 --relocatable-device-code true $(INCLUDE) 
 
