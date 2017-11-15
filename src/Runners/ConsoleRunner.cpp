@@ -42,7 +42,7 @@ public:
 	}
 	virtual std::string getTexturePath(const std::string& name)
 	{
-		return data_path + name;
+		return data_path + "pine/" + name;
 	}
 	virtual std::string getCompiledTexturePath(const std::string& name)
 	{
