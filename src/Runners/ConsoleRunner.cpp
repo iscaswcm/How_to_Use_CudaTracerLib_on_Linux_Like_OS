@@ -25,16 +25,21 @@
 #include "Kernel/Tracer.h"
 #include "Runners/ConsoleRunner.h"
 #include "Core/App.h"
+#include <boost/filesystem.hpp> 
+#include <boost/algorithm/string.hpp>
+#include <iostream> 
 using namespace std;
 using namespace CudaTracerLib;
 using namespace std::chrono;//The elements in this header deal with time
 
-//const std::string data_path = "Data/";
 class SimpleFileManager : public IFileManager
 {
 public:
-	SimpleFileManager(const std::string _data_path):data_path(_data_path)
+	SimpleFileManager(const std::string _data_path, const std::string _model_path):
+		data_path(_data_path), model_path(_model_path)
 	{
+		std::string tmptexture_path = boost::filesystem::path(std::string(data_path + model_path)).parent_path().string();
+	    texture_path = tmptexture_path + "/";
 	}
 	virtual std::string getCompiledMeshPath(const std::string& name)
 	{
@@ -42,7 +47,7 @@ public:
 	}
 	virtual std::string getTexturePath(const std::string& name)
 	{
-		return data_path + "pine/" + name;
+		return texture_path + name;
 	}
 	virtual std::string getCompiledTexturePath(const std::string& name)
 	{
@@ -51,6 +56,8 @@ public:
 	//public variables
 public:
 	const std::string data_path;
+	const std::string model_path; //subdirectory of data_path
+	std::string texture_path;
 };
 
 
@@ -89,7 +96,7 @@ int ConsoleRunner::run()
 	//Initializing the library and creating a scene
 	InitializeCuda4Tracer(modelPath);
 
-	SimpleFileManager fManager(modelPath);;
+	SimpleFileManager fManager(modelPath, modelName);;
 	Sensor camera = CreateAggregate<Sensor>(PerspectiveSensor(width, height, fov));
 
 	//A SceneInitData object specifies the maximum number of 
@@ -97,10 +104,17 @@ int ConsoleRunner::run()
 	// static SceneInitData CreateForScene(unsigned int a_Meshes, unsigned int a_NumObjects, unsigned int a_NumAvgTriPerObj,
 	// unsigned int a_NumAvgMatPerObj = 5, unsigned int a_NumLights = 1 << 10, unsigned int a_AnimSize = 0, bool envMap = true)
 	DynamicScene scene(&camera, SceneInitData::CreateForScene(100, 1000, 1000), &fManager);
-	//SetupScene(modelPath, modelName, camera, position, target, up, scene);
 	scene.CreateNode(modelPath + modelName);
 	camera.SetToWorld(position, target, up);
-
+#if 1
+	//check whether light exist or not
+	int numLights = scene.getLightCount();
+	if(numLights == 0) {
+		log.logInfo("WARNING: NO LIGHT EXISTS IN SCENE, AUTOMATELY ADD INFINITEAREALIGHT!!!!!!");
+		//an enviornement map can be scaled by a constant factor
+		scene.setEnvironementMap(Spectrum(1), "sky_white.exr");
+	}
+#endif
 	Image outImage(width, height);
 
 	//WavefrontPathTracer tracer;
@@ -113,7 +127,7 @@ int ConsoleRunner::run()
 	//initialize the tracer object with the output size and scene
 	tracer.Resize(width, height);
 	tracer.InitializeScene(&scene);
-
+	
 	//construct/update the scene BVH and copy data to the device
 	scene.UpdateScene();
 
@@ -122,7 +136,7 @@ int ConsoleRunner::run()
 	log.logInfo("width     = %u, height       = %u, fov          = %f", width, height, fov);
 	log.logInfo("filename  = %s, imageSamples = %u, pixelSamples = %u", 
 			settings.image.fileName.c_str(), settings.renderer.imageSamples, pixelSamples);
-	log.logInfo("Scene %d bounding box %s", modelName, scene.getSceneBox());
+	log.logInfo("Scene %s bounding box %s", modelName, scene.getSceneBox());
 
 	//the following code just implement a calibration,
 	//so user is able to know the exact rendering process
