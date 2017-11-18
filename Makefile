@@ -1,7 +1,8 @@
 ECHO       := echo -e
 DEF        := -m64  -DUSE_CUDA
-LIB        := -L../build.debug -lCudaTracerLib -lboost_system -lboost_filesystem -lboost_program_options -lboost_iostreams -lfreeimage
-INCLUDE    := -I. -Isrc -Isrc/include -I../CudaTracerLib.debug -I../qMatrixLib  
+BUILD      := build.ori
+LIB        := -L../$(BUILD) -lCudaTracerLib -lboost_system -lboost_filesystem -lboost_program_options -lboost_iostreams -lfreeimage
+INCLUDE    := -I. -Isrc -Isrc/include -I../CudaTracerLib.ori -I../qMatrixLib  
 NVCC_FLAGS := -std=c++11 -arch=compute_35 -code=sm_35 --relocatable-device-code true $(INCLUDE) 
 
 NVCC       := nvcc $(DEF)
@@ -20,7 +21,7 @@ TARGET       := hostExample
 $(TARGET): $(NVCC_OBJS) $(CU_OBJS) 
 	@$(ECHO) "\033[32;49;6mLinking $@\033[0m"
 	$(NVCC)  -o $@ $^ $(NVCC_FLAGS) $(LIB)
-	@cp src/Misc/cudatracerlib.ini .
+	@cp src/misc/cudatracerlib.ini .
 
 objs/%.cpp.o: src/%.cpp
 	@mkdir -p $(@D)

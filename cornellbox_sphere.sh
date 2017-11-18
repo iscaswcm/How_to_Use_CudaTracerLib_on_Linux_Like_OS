@@ -1,6 +1,6 @@
 ./hostExample  --model.name CornellBox_ori/CornellBox-Sphere.obj \
-  --renderer.imageSamples 2048 \
-  --renderer.pixelSamples 2048 \
+  --renderer.imageSamples 8 \
+  --renderer.pixelSamples 8 \
   --image.fileName CornellBox_Sphere.png \
   --image.width  1280 \
   --image.height 1000 \
