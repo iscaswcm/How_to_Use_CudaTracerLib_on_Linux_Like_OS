@@ -50,8 +50,9 @@ int App::run(int argc, char** argv)
 
 		log.logInfo("CUDA device: %s | Compute capability: %d.%d | Driver version: %d | Runtime version: %d", 
 				deviceProp.name, deviceProp.major, deviceProp.minor, driverVersion, runtimeVersion);
-		log.logInfo("CUDA global memory: %d MB | multiProcessorCount: %d | sharedMemPerMultiprocessor: %d KB | regsPerMultiprocessor: %d", 
-				deviceProp.totalGlobalMem / 1024 / 1024, deviceProp.multiProcessorCount, 
+		log.logInfo("CUDA global memory        : %6d MB | multiProcessorCount  : %6d", 
+				deviceProp.totalGlobalMem / 1024 / 1024, deviceProp.multiProcessorCount);
+		log.logInfo("sharedMemPerMultiprocessor: %6d KB | regsPerMultiprocessor: %6d", 
 				deviceProp.sharedMemPerMultiprocessor, deviceProp.regsPerMultiprocessor);
 
 #endif

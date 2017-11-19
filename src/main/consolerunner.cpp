@@ -130,7 +130,7 @@ int ConsoleRunner::run()
 	
 	//construct/update the scene BVH and copy data to the device
 	scene.UpdateScene();
-
+	std::cout<< scene.printInfo() <<"\n";
     //for debug
 	log.logInfo("modelPath = %s, modelName    = %s", modelPath.c_str(), modelName.c_str());
 	log.logInfo("width     = %u, height       = %u, fov          = %f", width, height, fov);
