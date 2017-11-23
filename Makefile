@@ -16,7 +16,8 @@ NVCC_OBJS    := $(subst src/, objs/, $(NVCC_SOURCES:.cpp=.cpp.o))
 CU_SOURCES   := $(call rwildcard, src/, *.cu)  
 CU_OBJS      := $(subst src/, objs/,$(CU_SOURCES:.cu=.cu.o))
 
-TARGET       := mitsubacuda
+#TARGET       := mitsubacuda
+TARGET       := hostExample
 
 $(TARGET): $(NVCC_OBJS) $(CU_OBJS) 
 	@$(ECHO) "\033[32;49;6mLinking $@\033[0m"
