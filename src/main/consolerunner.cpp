@@ -103,8 +103,10 @@ int ConsoleRunner::run()
 	//meshes/triangles to allocate sufficient storage on the GPU
 	// static SceneInitData CreateForScene(unsigned int a_Meshes, unsigned int a_NumObjects, unsigned int a_NumAvgTriPerObj,
 	// unsigned int a_NumAvgMatPerObj = 5, unsigned int a_NumLights = 1 << 10, unsigned int a_AnimSize = 0, bool envMap = true)
-	DynamicScene scene(&camera, SceneInitData::CreateForScene(100, 1000, 1000), &fManager);
+	DynamicScene scene(&camera, SceneInitData::CreateForScene(10, 10, 1000), &fManager);
 	scene.CreateNode(modelPath + modelName);
+	//scene.CreateNode(modelPath + "cornellbox_two/cornellbox_plus_x.obj");
+	//scene.SetNodeTransform(float4x4::Translate(2.02, 0, 0), window);
 	camera.SetToWorld(position, target, up);
 #if 1
 	//check whether light exist or not
@@ -155,7 +157,7 @@ int ConsoleRunner::run()
 		StringUtils::humanizeNumber(double(totalSamples)));
 
 	Timer renderingElapsedTimer;
-	renderingElapsedTimer.setAveragingAlpha(0.05f);
+	renderingElapsedTimer.setAveragingAlpha(0.025f);
 	renderingElapsedTimer.setTargetValue(float(totalSamples));
 
 	std::atomic<bool> renderThreadFinished(false);

@@ -1,6 +1,6 @@
 ECHO       := echo -e
 DEF        := -m64  -DUSE_CUDA
-BUILD      := build.ori
+BUILD      := build.debug
 LIB        := -L../$(BUILD) -lCudaTracerLib -lboost_system -lboost_filesystem -lboost_program_options -lboost_iostreams -lfreeimage
 INCLUDE    := -I. -Isrc -Isrc/include -I../CudaTracerLib.ori -I../qMatrixLib  
 NVCC_FLAGS := -std=c++11 -arch=compute_35 -code=sm_35 --relocatable-device-code true $(INCLUDE) 
@@ -16,7 +16,7 @@ NVCC_OBJS    := $(subst src/, objs/, $(NVCC_SOURCES:.cpp=.cpp.o))
 CU_SOURCES   := $(call rwildcard, src/, *.cu)  
 CU_OBJS      := $(subst src/, objs/,$(CU_SOURCES:.cu=.cu.o))
 
-TARGET       := hostExample 
+TARGET       := mitsubacuda
 
 $(TARGET): $(NVCC_OBJS) $(CU_OBJS) 
 	@$(ECHO) "\033[32;49;6mLinking $@\033[0m"

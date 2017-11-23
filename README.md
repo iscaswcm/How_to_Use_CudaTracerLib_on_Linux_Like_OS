@@ -1,4 +1,9 @@
-# example_use_CudaTracerLib
+Examples of rendered scenes by CudaTracerLib
+<p align="center">
+<img src="https://github.com/iscaswcm/example_use_CudaTracerLib/blob/master/CornellBox-Sphere_Res_1280x1000_imageSamples_4096_pixelSamples_4096.png" style="width:880px;">
+</a>
+</p>
+# Example_how_to_use_CudaTracerLib Library
 
 First of all, special thanks to CudaTracerLib's author Hannes Hergeth.
 
