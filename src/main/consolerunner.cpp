@@ -105,7 +105,6 @@ int ConsoleRunner::run()
 	// unsigned int a_NumAvgMatPerObj = 5, unsigned int a_NumLights = 1 << 10, unsigned int a_AnimSize = 0, bool envMap = true)
 	DynamicScene scene(&camera, SceneInitData::CreateForScene(10, 10, 1000), &fManager);
 	scene.CreateNode(modelPath + modelName);
-	//scene.CreateNode(modelPath + "cornellbox_two/cornellbox_plus_x.obj");
 	//scene.SetNodeTransform(float4x4::Translate(2.02, 0, 0), window);
 	camera.SetToWorld(position, target, up);
 #if 1
