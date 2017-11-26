@@ -1,0 +1,8 @@
+17:37:14.261 [Info] CudaTracerLib v0.1.0
+17:37:14.261 [Info] CPU thread count: 16
+17:37:17.081 [Info] modelPath = Data/, modelName    = cornellbox/cornellbox.obj
+17:37:17.081 [Info] width     = 800, height       = 800, fov          = 43.000000
+17:37:17.081 [Info] filename  = CornellBox.png, imageSamples = 128, pixelSamples = 128
+17:37:17.081 [Info] Scene cornellbox/cornellbox.obj bounding box [(-5, -1e-06, -5) - (5, 1.99, 5)]
+17:39:33.935 [Info] Writing final image cornellbox_Res_800x800_imageSamples_128_pixelSamples_128.png ......Done
+17:39:33.935 [Info] Total elapsed time: 00:02:19.674
